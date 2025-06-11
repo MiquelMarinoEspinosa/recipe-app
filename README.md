@@ -40,3 +40,5 @@ Delete
 - `src/assets`
 - `src/App.css`
 - `src/index.css`
+
+Copy [.env.dist](./foodapp/.env.dist) to `.env` file and replace the env variables which their real values
