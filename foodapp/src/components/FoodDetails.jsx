@@ -5,6 +5,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 
 export default function FoodDetails({ foodId }) {
   const [food, setFood] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function fetchFood() {
       if (!foodId) {
@@ -16,14 +17,38 @@ export default function FoodDetails({ foodId }) {
       const data = await response.json();
       console.log(data);
       setFood(data);
+      setIsLoading(false);
     }
     fetchFood();
   }, [foodId]);
   return (
     <div>
-      Food Details {foodId}
-      {food.title}
-      <img src={food.image} alt="" />
+      <div>
+        <h1>{food.title}</h1>
+        <img src={food.image} alt="" />
+        <div>
+          <span>
+            <strong>⏰ {food.readyInMinutes} Minutes</strong>
+          </span>
+          <span>
+            👪<strong>Serves {food.servings}</strong>
+          </span>
+          <span>{food.vegetarian ? "🥕 Vegetarian" : "🍖 Non-Vegetarian"}</span>
+          <span>{food.vegan ? "🐮 Vegan" : ""}</span>
+        </div>
+        <div>
+          💲<span>{food.pricePerServing / 100} Per serving</span>
+        </div>
+      </div>
+
+      <div>
+        <h2>Instructions</h2>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          food.analyzedInstructions[0].steps.map((step) => <li>{step.step}</li>)
+        )}
+      </div>
     </div>
   );
 }
