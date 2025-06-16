@@ -6,8 +6,8 @@ import AppBankAccountReducer from "./AppBankAccountReducer";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <App /> */}
+    <App />
     {/* <AppReduce /> */}
-    <AppBankAccountReducer />
+    {/* <AppBankAccountReducer /> */}
   </React.StrictMode>
 );
